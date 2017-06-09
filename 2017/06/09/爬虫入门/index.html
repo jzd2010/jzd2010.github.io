@@ -99,7 +99,7 @@
 <meta property="og:url" content="http://jzd2010.github.io/2017/06/09/爬虫入门/index.html">
 <meta property="og:site_name" content="Blog">
 <meta property="og:description" content="1.获取网页内容根据URL来获取它的网页信息，虽然我们在浏览器中看到的是一幅幅优美的画面，但是其实是由浏览器解释才呈现出来的，实质它是一段HTML代码，加 JS、CSS，如果把网页比作一个人，那么HTML便是他的骨架，JS便是他的肌肉，CSS便是它的衣服。所以最重要的部分是存在于HTML中。1234import urllib2request = urllib2.Request(&quot;http://ww">
-<meta property="og:updated_time" content="2017-06-09T11:59:46.533Z">
+<meta property="og:updated_time" content="2017-06-09T14:18:33.544Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="爬虫入门">
 <meta name="twitter:description" content="1.获取网页内容根据URL来获取它的网页信息，虽然我们在浏览器中看到的是一幅幅优美的画面，但是其实是由浏览器解释才呈现出来的，实质它是一段HTML代码，加 JS、CSS，如果把网页比作一个人，那么HTML便是他的骨架，JS便是他的肌肉，CSS便是它的衣服。所以最重要的部分是存在于HTML中。1234import urllib2request = urllib2.Request(&quot;http://ww">
@@ -111,7 +111,7 @@
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    sidebar: {"position":"left","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: true,
     duoshuo: {
@@ -162,7 +162,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -341,9 +341,7 @@
 
       
         <h2 id="1-获取网页内容"><a href="#1-获取网页内容" class="headerlink" title="1.获取网页内容"></a>1.获取网页内容</h2><p>根据URL来获取它的网页信息，虽然我们在浏览器中看到的是一幅幅优美的画面，但是其实是由浏览器解释才呈现出来的，实质它是一段HTML代码，加 JS、CSS，如果把网页比作一个人，那么HTML便是他的骨架，JS便是他的肌肉，CSS便是它的衣服。所以最重要的部分是存在于HTML中。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> urllib2</div><div class="line">request = urllib2.Request(<span class="string">"http://www.baidu.com"</span>)</div><div class="line">response = urllib2.urlopen(request)</div><div class="line"><span class="keyword">print</span> response.read()</div></pre></td></tr></table></figure></p>
-<p>首先构造一个request类实例，构造时传入参数url、data、timeout等。</p>
-<h3 id="通过urllib2库的urlopen方法获得网页内容。urlopen一般接受三个参数，它的参数如下："><a href="#通过urllib2库的urlopen方法获得网页内容。urlopen一般接受三个参数，它的参数如下：" class="headerlink" title="通过urllib2库的urlopen方法获得网页内容。urlopen一般接受三个参数，它的参数如下："></a>通过urllib2库的urlopen方法获得网页内容。urlopen一般接受三个参数，它的参数如下：</h3><p>第一个参数url即为URL，第二个参数data是访问URL时要传送的数据，第三个timeout是设置超时时间。<br>第二三个参数是可以不传送的，data默认为空None，timeout默认为 socket._GLOBAL_DEFAULT_TIMEOUT</p>
-<h3 id="Timeout-参数设置"><a href="#Timeout-参数设置" class="headerlink" title="Timeout 参数设置"></a>Timeout 参数设置</h3><p>Timeout用于设置等待多久超时，解决一些网站响应过慢的问题。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> urllib2</div><div class="line">response = urllib2.urlopen(<span class="string">'http://www.baidu.com'</span>, timeout=<span class="number">10</span>)</div><div class="line"><span class="keyword">or</span>    </div><div class="line"><span class="keyword">import</span> urllib2</div><div class="line">response = urllib2.urlopen(<span class="string">'http://www.baidu.com'</span>, data, <span class="number">10</span>)</div></pre></td></tr></table></figure></p>
+<p>首先构造一个request类实例，构造时传入参数url、data、timeout等。<br><strong><em>通过urllib2库的urlopen方法获得网页内容。urlopen一般接受三个参数，它的参数如下：</em></strong><br>第一个参数url即为URL，第二个参数data是访问URL时要传送的数据，第三个timeout是设置超时时间。<br>第二三个参数是可以不传送的，data默认为空None，timeout默认为 socket._GLOBAL_DEFAULT_TIMEOUT<br><strong><em>Timeout 参数设置</em></strong><br>Timeout用于设置等待多久超时，解决一些网站响应过慢的问题。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> urllib2</div><div class="line">response = urllib2.urlopen(<span class="string">'http://www.baidu.com'</span>, timeout=<span class="number">10</span>)</div><div class="line"><span class="keyword">or</span>    </div><div class="line"><span class="keyword">import</span> urllib2</div><div class="line">response = urllib2.urlopen(<span class="string">'http://www.baidu.com'</span>, data, <span class="number">10</span>)</div></pre></td></tr></table></figure></p>
 <h2 id="2-POST和GET数据传送"><a href="#2-POST和GET数据传送" class="headerlink" title="2.POST和GET数据传送"></a>2.POST和GET数据传送</h2><p>对于动态网页，需要动态地传递参数给网页，POST和GET就是数据传送的两种方式。</p>
 <h3 id="POST方式"><a href="#POST方式" class="headerlink" title="POST方式"></a>POST方式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> urllib</div><div class="line"><span class="keyword">import</span> urllib2</div><div class="line"> </div><div class="line">values = &#123;<span class="string">"username"</span>:<span class="string">"xxxxx"</span>,<span class="string">"password"</span>:<span class="string">"XXXX"</span>&#125;</div><div class="line">data = urllib.urlencode(values) </div><div class="line">url = <span class="string">"https://passport.csdn.net/account/login?from=http://my.csdn.net/my/mycsdn"</span></div><div class="line">request = urllib2.Request(url,data)</div><div class="line">response = urllib2.urlopen(request)</div><div class="line"><span class="keyword">print</span> response.read()</div></pre></td></tr></table></figure>
 <p>我们引入了urllib库，现在我们模拟登陆CSDN，当然上述代码可能登陆不进去，因为CSDN还有个流水号的字段，没有设置全，比较复杂在这里就不写上去了，在此只是说明登录的原理。一般的登录网站一般是这种写法。</p>
@@ -353,10 +351,10 @@
 <p>另外还有应对“反盗链”的方式，对付反盗链，服务器会识别Header中的referer是不是服务器自己，如果不是，服务器就不会响应，所以在Header中加入referer。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">headers = &#123; <span class="string">'User-Agent'</span> : <span class="string">'Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)'</span>  ,</div><div class="line">                        <span class="string">'Referer'</span>:<span class="string">'http://www.zhihu.com/articles'</span> &#125;</div></pre></td></tr></table></figure></p>
 <h3 id="设置代理Proxy"><a href="#设置代理Proxy" class="headerlink" title="设置代理Proxy"></a>设置代理Proxy</h3><p>urllib2 默认会使用环境变量 http_proxy 来设置 HTTP Proxy。假如一个网站它会检测某一段时间某个IP 的访问次数，如果访问次数过多，它会禁止你的访问。所以你可以设置一些代理服务器来帮助你做工作，每隔一段时间换一个代理，网站君都不知道是谁在捣鬼了，这酸爽！</p>
 <p>下面一段代码说明了代理的设置用法<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> urllib2</div><div class="line">enable_proxy = <span class="keyword">True</span></div><div class="line">proxy_handler = urllib2.ProxyHandler(&#123;<span class="string">"http"</span> : <span class="string">'http://some-proxy.com:8080'</span>&#125;)</div><div class="line">null_proxy_handler = urllib2.ProxyHandler(&#123;&#125;)</div><div class="line"><span class="keyword">if</span> enable_proxy:</div><div class="line">    opener = urllib2.build_opener(proxy_handler)</div><div class="line"><span class="keyword">else</span>:</div><div class="line">    opener = urllib2.build_opener(null_proxy_handler)</div><div class="line">urllib2.install_opener(opener)</div></pre></td></tr></table></figure></p>
-<h3 id="URLError异常处理"><a href="#URLError异常处理" class="headerlink" title="URLError异常处理"></a>URLError异常处理</h3><h3 id="URLError"><a href="#URLError" class="headerlink" title="URLError"></a>URLError</h3><p>首先解释下URLError可能产生的原因：<br>1.网络无连接，即本机无法上网<br>2.连接不到特定的服务器<br>3.服务器不存在<br>在代码中，我们需要用try-except语句来包围并捕获相应的异常。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> urllib2</div><div class="line">requset = urllib2.Request(<span class="string">'http://www.xxxxx.com'</span>)</div><div class="line"><span class="keyword">try</span>:</div><div class="line">    urllib2.urlopen(request)</div><div class="line"><span class="keyword">except</span> urllib2.URLError, e:</div><div class="line">    <span class="keyword">print</span> e.reason</div></pre></td></tr></table></figure></p>
+<h3 id="URLError异常处理"><a href="#URLError异常处理" class="headerlink" title="URLError异常处理"></a>URLError异常处理</h3><h4 id="URLError"><a href="#URLError" class="headerlink" title="URLError"></a>URLError</h4><p>首先解释下URLError可能产生的原因：<br>1.网络无连接，即本机无法上网<br>2.连接不到特定的服务器<br>3.服务器不存在<br>在代码中，我们需要用try-except语句来包围并捕获相应的异常。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> urllib2</div><div class="line">requset = urllib2.Request(<span class="string">'http://www.xxxxx.com'</span>)</div><div class="line"><span class="keyword">try</span>:</div><div class="line">    urllib2.urlopen(request)</div><div class="line"><span class="keyword">except</span> urllib2.URLError, e:</div><div class="line">    <span class="keyword">print</span> e.reason</div></pre></td></tr></table></figure></p>
 <p>运行结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[Errno 11004] getaddrinfo failed</div></pre></td></tr></table></figure></p>
 <p>它说明错误代码是11004，错误原因是getaddrinfo failed。</p>
-<h3 id="HTTPError"><a href="#HTTPError" class="headerlink" title="HTTPError"></a>HTTPError</h3><p>HTTPError是URLError的子类，在你利用urlopen方法发出一个请求时，服务器上都会对应一个应答对象response，其中它包含一个数字”状态码”。<br>HTTP状态码表示HTTP协议所返回的响应的状态。下面将状态码归结如下：</p>
+<h4 id="HTTPError"><a href="#HTTPError" class="headerlink" title="HTTPError"></a>HTTPError</h4><p>HTTPError是URLError的子类，在你利用urlopen方法发出一个请求时，服务器上都会对应一个应答对象response，其中它包含一个数字”状态码”。<br>HTTP状态码表示HTTP协议所返回的响应的状态。下面将状态码归结如下：</p>
 <blockquote>
 <p>100：继续  客户端应当继续发送请求。客户端应当继续发送请求的剩余部分，或者如果请求已经完成，忽略这个响应。<br>101： 转换协议  在发送完这个响应最后的空行后，服务器将会切换到在Upgrade 消息头中定义的那些协议。只有在切换新的协议更有好处的时候才应该采取类似措施。<br>102：继续处理   由WebDAV（RFC 2518）扩展的状态码，代表处理将被继续执行。<br>200：请求成功      处理方式：获得响应的内容，进行处理<br>201：请求完成，结果是创建了新资源。新创建资源的URI可在响应的实体中得到    处理方式：爬虫中不会遇到<br>202：请求被接受，但处理尚未完成    处理方式：阻塞等待<br>204：服务器端已经实现了请求，但是没有返回新的信 息。如果客户是用户代理，则无须为此更新自身的文档视图。    处理方式：丢弃<br>300：该状态码不被HTTP/1.0的应用程序直接使用， 只是作为3XX类型回应的默认解释。存在多个可用的被请求资源。    处理方式：若程序中能够处理，则进行进一步处理，如果程序中不能处理，则丢弃<br>301：请求到的资源都会分配一个永久的URL，这样就可以在将来通过该URL来访问此资源    处理方式：重定向到分配的URL<br>302：请求到的资源在一个不同的URL处临时保存     处理方式：重定向到临时的URL<br>304：请求的资源未更新     处理方式：丢弃<br>400：非法请求     处理方式：丢弃<br>401：未授权     处理方式：丢弃<br>403：禁止     处理方式：丢弃<br>404：没有找到     处理方式：丢弃<br>500：服务器内部错误  服务器遇到了一个未曾预料的状况，导致了它无法完成对请求的处理。一般来说，这个问题都会在服务器端的源代码出现错误时出现。<br>501：服务器无法识别  服务器不支持当前请求所需要的某个功能。当服务器无法识别请求的方法，并且无法支持其对任何资源的请求。<br>502：错误网关  作为网关或者代理工作的服务器尝试执行请求时，从上游服务器接收到无效的响应。<br>503：服务出错   由于临时的服务器维护或者过载，服务器当前无法处理请求。这个状况是临时的，并且将在一段时间以后恢复。</p>
 </blockquote>
@@ -377,6 +375,27 @@
     <div>
       
         
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/path/to/wechat-reward-image" alt="zd jiang WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/path/to/alipay-reward-image" alt="zd jiang Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
 
       
     </div>
@@ -399,7 +418,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/09/hello-world/" rel="next" title="使用hexo+Next主题创建Github博客">
+              <a href="/2017/06/09/使用hexo+Next创建Github博客/" rel="next" title="使用hexo+Next主题创建Github博客">
                 <i class="fa fa-chevron-left"></i> 使用hexo+Next主题创建Github博客
               </a>
             
@@ -529,7 +548,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-获取网页内容"><span class="nav-number">1.</span> <span class="nav-text">1.获取网页内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#通过urllib2库的urlopen方法获得网页内容。urlopen一般接受三个参数，它的参数如下："><span class="nav-number">1.1.</span> <span class="nav-text">通过urllib2库的urlopen方法获得网页内容。urlopen一般接受三个参数，它的参数如下：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Timeout-参数设置"><span class="nav-number">1.2.</span> <span class="nav-text">Timeout 参数设置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-POST和GET数据传送"><span class="nav-number">2.</span> <span class="nav-text">2.POST和GET数据传送</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#POST方式"><span class="nav-number">2.1.</span> <span class="nav-text">POST方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GET方式"><span class="nav-number">2.2.</span> <span class="nav-text">GET方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置Headers"><span class="nav-number">2.3.</span> <span class="nav-text">设置Headers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置代理Proxy"><span class="nav-number">2.4.</span> <span class="nav-text">设置代理Proxy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#URLError异常处理"><span class="nav-number">2.5.</span> <span class="nav-text">URLError异常处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#URLError"><span class="nav-number">2.6.</span> <span class="nav-text">URLError</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTPError"><span class="nav-number">2.7.</span> <span class="nav-text">HTTPError</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-获取网页内容"><span class="nav-number">1.</span> <span class="nav-text">1.获取网页内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-POST和GET数据传送"><span class="nav-number">2.</span> <span class="nav-text">2.POST和GET数据传送</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#POST方式"><span class="nav-number">2.1.</span> <span class="nav-text">POST方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GET方式"><span class="nav-number">2.2.</span> <span class="nav-text">GET方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置Headers"><span class="nav-number">2.3.</span> <span class="nav-text">设置Headers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置代理Proxy"><span class="nav-number">2.4.</span> <span class="nav-text">设置代理Proxy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#URLError异常处理"><span class="nav-number">2.5.</span> <span class="nav-text">URLError异常处理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#URLError"><span class="nav-number">2.5.1.</span> <span class="nav-text">URLError</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTPError"><span class="nav-number">2.5.2.</span> <span class="nav-text">HTTPError</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
