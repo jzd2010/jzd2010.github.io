@@ -1,0 +1,924 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="-深度学习," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="1、安装CUDA，CUDA安装在系统目录下，用root账号安装！123sudo dpkg -i cuda.debsudo apt-get updatesudo apt-get install cuda note:下边的 $HOME=/home/jzd 2、安装anaconda1bash Anaconda2-4.0.0-Linux-x86_64.sh 中间填写安装路径，安装在自己目录下的local/">
+<meta name="keywords" content="-深度学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ubuntu14.04配置Caffe">
+<meta property="og:url" content="http://jzd2010.github.io/2017/06/12/Ubuntu14-04配置Caffe/index.html">
+<meta property="og:site_name" content="滴水成洋">
+<meta property="og:description" content="1、安装CUDA，CUDA安装在系统目录下，用root账号安装！123sudo dpkg -i cuda.debsudo apt-get updatesudo apt-get install cuda note:下边的 $HOME=/home/jzd 2、安装anaconda1bash Anaconda2-4.0.0-Linux-x86_64.sh 中间填写安装路径，安装在自己目录下的local/">
+<meta property="og:updated_time" content="2017-06-12T13:20:24.453Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ubuntu14.04配置Caffe">
+<meta name="twitter:description" content="1、安装CUDA，CUDA安装在系统目录下，用root账号安装！123sudo dpkg -i cuda.debsudo apt-get updatesudo apt-get install cuda note:下边的 $HOME=/home/jzd 2、安装anaconda1bash Anaconda2-4.0.0-Linux-x86_64.sh 中间填写安装路径，安装在自己目录下的local/">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"always","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://jzd2010.github.io/2017/06/12/Ubuntu14-04配置Caffe/"/>
+
+
+
+
+
+  <title>Ubuntu14.04配置Caffe | 滴水成洋</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?cab72e2ce34eb3ba9f34a90a25a2dd1e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">滴水成洋</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Jzd's Blog</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://jzd2010.github.io/2017/06/12/Ubuntu14-04配置Caffe/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zd jiang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/0.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="滴水成洋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Ubuntu14.04配置Caffe</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-12T16:22:43+08:00">
+                2017-06-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/建站/" itemprop="url" rel="index">
+                    <span itemprop="name">建站</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/06/12/Ubuntu14-04配置Caffe/" class="leancloud_visitors" data-flag-title="Ubuntu14.04配置Caffe">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1、安装CUDA，CUDA安装在系统目录下，用root账号安装！"><a href="#1、安装CUDA，CUDA安装在系统目录下，用root账号安装！" class="headerlink" title="1、安装CUDA，CUDA安装在系统目录下，用root账号安装！"></a>1、安装CUDA，CUDA安装在系统目录下，用root账号安装！</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo dpkg -i cuda.deb</div><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install cuda</div></pre></td></tr></table></figure>
+<p><strong><em>note:下边的 $HOME=/home/jzd</em></strong></p>
+<h2 id="2、安装anaconda"><a href="#2、安装anaconda" class="headerlink" title="2、安装anaconda"></a>2、安装anaconda</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bash Anaconda2-4.0.0-Linux-x86_64.sh</div></pre></td></tr></table></figure>
+<p>中间填写安装路径，安装在自己目录下的local/anaconda里<br>添加环境变量<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">export LD_LIBRARY_PATH=&quot;$LD_LIBRARY_PATH:/home/jzd/local/anaconda2/lib&quot;</div><div class="line">export PATH=&quot;/home/jzd/local/anaconda2/bin:$PATH&quot;</div></pre></td></tr></table></figure></p>
+<h2 id="3、Install-openblas"><a href="#3、Install-openblas" class="headerlink" title="3、Install openblas"></a>3、Install openblas</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">tar -zxvf OpenBLAS-0.2.18.tar.gz</div><div class="line">cd OpenBLAS-0.2.18</div><div class="line">mkdir -p $HOME/local/OpenBLAS</div><div class="line">make -j8</div><div class="line">make PREFIX=$HOME/local/OpenBLAS install</div><div class="line">cd ../</div><div class="line">rm -rf OpenBLAS-0.2.18</div></pre></td></tr></table></figure>
+<h2 id="4、Install-cmake"><a href="#4、Install-cmake" class="headerlink" title="4、Install cmake"></a>4、Install cmake</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">tar zxvf cmake-3.5.2.tar.gz</div><div class="line">cd cmake-3.5.2</div><div class="line">mkdir -p $HOME/local/cmake-3.5.2</div><div class="line">./bootstrap --prefix=$HOME/local/cmake-3.5.2</div><div class="line">make -j8</div><div class="line">make install</div><div class="line"><span class="meta">#</span>添加环境变量</div><div class="line">vim ~/.bashrc</div><div class="line">export PATH=/home/jzd/local/cmake-3.5.2/bin:$PATH</div><div class="line">source ~/.bashrc</div><div class="line">cd ../</div><div class="line">rm -rf cmake-3.5.2</div></pre></td></tr></table></figure>
+<h2 id="5、Install-Protobuf"><a href="#5、Install-Protobuf" class="headerlink" title="5、Install Protobuf"></a>5、Install Protobuf</h2><p>先安装c++版<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">tar zxvf protobuf-2.6.1.tar.gz</div><div class="line">cd protobuf-2.6.1</div><div class="line">./configure --prefix=$HOME/local</div><div class="line">make -j8</div><div class="line">make install</div></pre></td></tr></table></figure></p>
+<p>继续安装Python版<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">cd python</div><div class="line">python -V (Make sure you have Python 2.7 or newer)</div><div class="line">python setup.py build</div><div class="line">python setup.py google_test</div><div class="line">python setup.py install</div><div class="line">cd ../../</div><div class="line">rm -rf protobuf-2.6.1</div></pre></td></tr></table></figure></p>
+<h2 id="6、Install-snappy"><a href="#6、Install-snappy" class="headerlink" title="6、Install snappy"></a>6、Install snappy</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">tar zxvf snappy-1.1.3.tar.gz</div><div class="line">cd snappy-1.1.3</div><div class="line">./configure --prefix=$HOME/local</div><div class="line">make -j8</div><div class="line">make install</div><div class="line">cd ../</div><div class="line">rm -rf snappy-1.1.3</div></pre></td></tr></table></figure>
+<h2 id="7、Install-leveldb"><a href="#7、Install-leveldb" class="headerlink" title="7、Install leveldb"></a>7、Install leveldb</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">tar zxvf leveldb-1.18.tar.gz</div><div class="line">cd leveldb-1.18</div><div class="line">make -j8</div><div class="line">cp -av libleveldb.* $HOME/local/lib/</div><div class="line">cp -av include/leveldb $HOME/local/include/</div><div class="line">cd ../</div><div class="line">rm -rf leveldb-1.18</div></pre></td></tr></table></figure>
+<h2 id="8、安装OpenCV"><a href="#8、安装OpenCV" class="headerlink" title="8、安装OpenCV"></a>8、安装OpenCV</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>install package required by OpenCV</div><div class="line">sudo apt-get build-dep -y opencv</div><div class="line">git clone https://github.com/Itseez/opencv.git</div><div class="line">git clone https://github.com/Itseez/opencv_contrib.git</div><div class="line">cd opencv</div><div class="line">git checkout 3.1.0 -b 3.1.0</div><div class="line">mkdir release &amp;&amp; cd release</div><div class="line">cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/home/jzd/local -D BUILD_opencv_gpu=ON -D CUDA_GENERATION=Auto -D PYTHON_LIBRARY=/home/jzd/local/anaconda2/bin ..</div><div class="line">make -j4</div><div class="line">make install</div><div class="line">cd ../../</div><div class="line">rm -rf opencv</div></pre></td></tr></table></figure>
+<p><strong><em>OR</em></strong><br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#</span>install package required by OpenCV</div><div class="line">sudo apt-get build-dep -y opencv</div><div class="line">git clone https://github.com/Itseez/opencv</div><div class="line">cd opencv</div><div class="line">git checkout 3.1.0 -b 3.1.0</div><div class="line">mkdir release &amp;&amp; cd release</div><div class="line">cmake -G 'Unix Makefiles' -D CMAKE_VERBOSE_MAKEFILE=ON -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/home/jzd/local -D OPENCV_EXTRA_MODULES_PATH=/home/jzd/Downloads/opencv_contrib/modules -D BUILD_opencv_gpu=ON -D CUDA_GENERATION=Auto -D BUILD_EXAMPLES=ON -D INSTALL_C_EXAMPLES=ON -D INSTALL_PYTHON_EXAMPLES=ON -D BUILD_NEW_PYTHON_SUPPORT=ON -D WITH_FFMPEG=ON -D WITH_GSTREAMER=OFF -D WITH_GTK=ON -D WITH_JASPER=ON -D WITH_JPEG=ON -D WITH_PNG=ON -D WITH_TIFF=ON -D WITH_OPENEXR=ON -D WITH_PVAPI=ON -D WITH_UNICAP=OFF -D WITH_EIGEN=ON -D WITH_XINE=OFF -D BUILD_TESTS=OFF -D CMAKE_SKIP_RPATH=ON -D WITH_CUDA=OFF -D ENABLE_PRECOMPILED_HEADERS=OFF -D ENABLE_SSE=ON -DENABLE_SSE2=ON -D ENABLE_SSE3=OFF -D WITH_OPENGL=ON -DWITH_TBB=ON -D WITH_1394=ON -DWITH_V4L=ON -D PYTHON_LIBRARY=/home/jzd/local/anaconda2/bin ..</div><div class="line">make -j4</div><div class="line">make install</div><div class="line">cd ../../</div><div class="line">rm -rf opencv</div></pre></td></tr></table></figure></p>
+<p><strong><em>这个会报错。。。</em></strong></p>
+<blockquote>
+<p><strong><em>包含第三方包的时候，如果cmake过程中提示：ippicv_linux_20141027.tgz的hash码不对，或者下载失败，则手动下载，地址<a href="https://sourceforge.net/projects/opencvlibrary/files/3rdparty/ippicv/，将下载的ippicv_linux_20141027.tgz手动复制到" target="_blank" rel="external">https://sourceforge.net/projects/opencvlibrary/files/3rdparty/ippicv/，将下载的ippicv_linux_20141027.tgz手动复制到</a> opencv/3rdparty/ippicv/downloads/linux-8b449a536a2157bcad08a2b9f266828b文件夹中，重新cmake即可</em></strong></p>
+</blockquote>
+<h2 id="9、Install-Boost-（安装旧版的没有bug）"><a href="#9、Install-Boost-（安装旧版的没有bug）" class="headerlink" title="9、Install Boost （安装旧版的没有bug）"></a>9、Install Boost （安装旧版的没有bug）</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">tar zxvf boost_1_60_0.tar.gz</div><div class="line">cd boost_1_60_0</div><div class="line">./bootstrap.sh --prefix=$HOME/local</div><div class="line">./b2 -j8</div><div class="line">./b2 install</div></pre></td></tr></table></figure>
+<p>安装新版本的boost（boost_1_60_0）里面的gcc.h头文件定义存在bug，解决办法是安装完毕后：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi $HOME/local/include/boost/config/compiler/gcc.hpp</div></pre></td></tr></table></figure></p>
+<p>定位到156行（#if defined(_GLIBCXX_USE_FLOAT128) &amp;&amp; !defined(<strong>STRICT_ANSI</strong>)）<br>把156行修改为#if defined(_GLIBCXX_USE_FLOAT128) &amp;&amp; !defined(<strong>STRICT_ANSI</strong>) &amp;&amp; !defined(<strong>CUDACC</strong>)即可，不需要重新编译<br>安装旧版本的boost_1_55_0.tar不存在这个问题（建议安装旧版的）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">cd boost_1_55_0</div><div class="line">./bootstrap.sh --prefix=$HOME/local</div><div class="line">./b2 -j8</div><div class="line">./b2 install</div><div class="line">cd ../</div><div class="line">rm -rf boost_1_55_0</div></pre></td></tr></table></figure></p>
+<h2 id="10、Install-google-glog"><a href="#10、Install-google-glog" class="headerlink" title="10、Install google-glog"></a>10、Install google-glog</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">tar zxvf glog-0.3.4.tar.gz</div><div class="line">cd glog-0.3.4</div><div class="line">./configure --prefix=$HOME/local</div><div class="line">make -j8</div><div class="line">make install</div><div class="line">cd ../</div><div class="line">rm -rf glog-0.3.4</div></pre></td></tr></table></figure>
+<h2 id="11、Install-gflags"><a href="#11、Install-gflags" class="headerlink" title="11、Install gflags"></a>11、Install gflags</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">tar zxvf gflags-2.1.2.tar.gz</div><div class="line">cd gflags-2.1.2</div><div class="line">mkdir build &amp;&amp; cd build</div><div class="line">CXXFLAGS=&quot;-fPIC&quot; cmake -D CMAKE_INSTALL_PREFIX=$HOME/local ..</div><div class="line">make -j8</div><div class="line">make install</div><div class="line">cd ../../</div><div class="line">rm -rf gflags-2.1.2</div></pre></td></tr></table></figure>
+<h2 id="12、Install-lmdb"><a href="#12、Install-lmdb" class="headerlink" title="12、Install lmdb"></a>12、Install lmdb</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">tar zxvf lmdb-LMDB_0.9.18.tar.gz</div><div class="line">cd lmdb-LMDB_0.9.18/libraries/liblmdb</div><div class="line">make -j8</div><div class="line">make prefix=$HOME/local install</div><div class="line">cd ../../../</div><div class="line">rm -rf lmdb-LMDB_0.9.18</div></pre></td></tr></table></figure>
+<h2 id="13、Install-hdf5"><a href="#13、Install-hdf5" class="headerlink" title="13、Install hdf5"></a>13、Install hdf5</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">tar zxvf hdf5-1.8.14.tar.gz</div><div class="line">cd hdf5-1.8.14</div><div class="line">./configure --prefix=$HOME/local</div><div class="line">make -j8</div><div class="line">make check  -j8              # run test suite.</div><div class="line">make install</div><div class="line">make check-install -j8       # verify installation.</div><div class="line">cd ../</div><div class="line">rm -rf hdf5-1.8.14</div></pre></td></tr></table></figure>
+<h2 id="14、Install-cuDNN"><a href="#14、Install-cuDNN" class="headerlink" title="14、Install cuDNN"></a>14、Install cuDNN</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">tar zxvf cudnn-7.0-linux-x64-v3.0-prod.tgz</div><div class="line">cd cuda</div><div class="line">cp -av lib64/*  ~/local/lib</div><div class="line">cp -av include/*  ~/local/include</div><div class="line">cd ../</div><div class="line">rm -rf cuda</div></pre></td></tr></table></figure>
+<h2 id="add-path-to-bashrc"><a href="#add-path-to-bashrc" class="headerlink" title="add path to ~/.bashrc"></a>add path to ~/.bashrc</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">#CUDA</div><div class="line">export PATH=/usr/local/cuda/bin:$PATH</div><div class="line">export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH</div><div class="line">#for OpenBLAS</div><div class="line">export LD_LIBRARY_PATH=/home/jzd/local/OpenBLAS/lib:$LD_LIBRARY_PATH</div><div class="line">export OPENBLAS_NUM_THREADS=20</div><div class="line">#for ~/local </div><div class="line">export LD_LIBRARY_PATH=/home/jzd/local/lib:$LD_LIBRARY_PATH</div><div class="line">export PATH=/home/jzd/local/bin:$PATH</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">source ~/.bashrc</div></pre></td></tr></table></figure>
+<p><strong><em>/sbin/ldconfig.real: /usr/lib/nvidia-375/libEGL.so.1 is not a symbolic link错误解决方法：</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo mv /usr/lib/nvidia-375/libEGL.so.1 /usr/lib/nvidia-375/libEGL.so.1.org</div><div class="line">sudo mv /usr/lib32/nvidia-375/libEGL.so.1 /usr/lib32/nvidia-375/libEGL.so.1.org</div><div class="line">sudo ln -s /usr/lib/nvidia-375/libEGL.so.375.39 /usr/lib/nvidia-375/libEGL.so.1</div><div class="line">sudo ln -s /usr/lib32/nvidia-375/libEGL.so.375.39 /usr/lib32/nvidia-375/libEGL.so.1</div></pre></td></tr></table></figure></p>
+<h2 id="安装caffe"><a href="#安装caffe" class="headerlink" title="安装caffe"></a>安装caffe</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">git clone https://github.com/BVLC/caffe.git</div><div class="line">cd caffe/python</div><div class="line">for req in $(cat requirements.txt);do sudo -H /home/jzd/local/anaconda2/pip install $req --upgrade;done</div><div class="line">sudo apt-get update</div><div class="line">#export PYTHONPATH=/home/jzd/caffe/python:$PYTHONPATH</div><div class="line">#export PYTHONPATH=/home/jzd/caffe:$PYTHONPATH</div><div class="line">cd ../</div><div class="line">cp Makefile.config.example Makefile.config</div></pre></td></tr></table></figure>
+<p>编辑Makefile.config的内容。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">make clean # 第一次编译不用这句，出错时也可使用这句。</div><div class="line">make all</div><div class="line">make test</div><div class="line">make runtest</div><div class="line">make pycaffe</div><div class="line">make distribute</div></pre></td></tr></table></figure></p>
+<p><strong><em>Training LeNet on MNIST with Caffe</em></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">cd 进caffe目录</div><div class="line">sh data/mnist/get_mnist.sh</div><div class="line">sh examples/mnist/create_mnist.sh</div><div class="line">sh examples/mnist/train_lenet.sh</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/path/to/wechat-reward-image" alt="zd jiang WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/path/to/alipay-reward-image" alt="zd jiang Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/深度学习/" rel="tag"># -深度学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/12/卷积网络Trick/" rel="next" title="卷积网络Trick">
+                <i class="fa fa-chevron-left"></i> 卷积网络Trick
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/12/win10安装Caffe/" rel="prev" title="win10安装Caffe">
+                win10安装Caffe <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/0.png"
+               alt="zd jiang" />
+          <p class="site-author-name" itemprop="name">zd jiang</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jzd2010" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、安装CUDA，CUDA安装在系统目录下，用root账号安装！"><span class="nav-number">1.</span> <span class="nav-text">1、安装CUDA，CUDA安装在系统目录下，用root账号安装！</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、安装anaconda"><span class="nav-number">2.</span> <span class="nav-text">2、安装anaconda</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、Install-openblas"><span class="nav-number">3.</span> <span class="nav-text">3、Install openblas</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、Install-cmake"><span class="nav-number">4.</span> <span class="nav-text">4、Install cmake</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5、Install-Protobuf"><span class="nav-number">5.</span> <span class="nav-text">5、Install Protobuf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6、Install-snappy"><span class="nav-number">6.</span> <span class="nav-text">6、Install snappy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7、Install-leveldb"><span class="nav-number">7.</span> <span class="nav-text">7、Install leveldb</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8、安装OpenCV"><span class="nav-number">8.</span> <span class="nav-text">8、安装OpenCV</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9、Install-Boost-（安装旧版的没有bug）"><span class="nav-number">9.</span> <span class="nav-text">9、Install Boost （安装旧版的没有bug）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10、Install-google-glog"><span class="nav-number">10.</span> <span class="nav-text">10、Install google-glog</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11、Install-gflags"><span class="nav-number">11.</span> <span class="nav-text">11、Install gflags</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12、Install-lmdb"><span class="nav-number">12.</span> <span class="nav-text">12、Install lmdb</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13、Install-hdf5"><span class="nav-number">13.</span> <span class="nav-text">13、Install hdf5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14、Install-cuDNN"><span class="nav-number">14.</span> <span class="nav-text">14、Install cuDNN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#add-path-to-bashrc"><span class="nav-number">15.</span> <span class="nav-text">add path to ~/.bashrc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装caffe"><span class="nav-number">16.</span> <span class="nav-text">安装caffe</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zd jiang</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("DyETNbsxecNiPk7CIH8NBDTa-gzGzoHsz", "dubSI6nQxthT11B1z7OGQmlE");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
