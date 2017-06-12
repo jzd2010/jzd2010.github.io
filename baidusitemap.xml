@@ -4,8 +4,28 @@
 
     
   <url>
+    <loc>http://jzd2010.github.io/2017/06/12/Next%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0%E9%98%85%E8%AF%BB%E9%87%8F%E7%BB%9F%E8%AE%A1%E5%8A%9F%E8%83%BD/</loc>
+    <lastmod>2017-06-12T05:15:37.318Z</lastmod>
+    <data>
+        <display>
+        <title>Next主题添加文章阅读量统计功能</title>
+        <pubTime>2017-06-12T03:15:27.000Z</pubTime>
+        
+        <tag>-建站</tag>
+         
+         
+           
+             
+              <breadCrumb title="建站" url="http://jzd2010.github.io/categories/%E5%BB%BA%E7%AB%99/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://jzd2010.github.io/2017/06/09/%E7%88%AC%E8%99%AB%E5%85%A5%E9%97%A8/</loc>
-    <lastmod>2017-06-12T02:20:27.070Z</lastmod>
+    <lastmod>2017-06-12T05:05:13.303Z</lastmod>
     <data>
         <display>
         <title>爬虫入门</title>
@@ -25,18 +45,18 @@
     
   <url>
     <loc>http://jzd2010.github.io/2017/06/09/%E4%BD%BF%E7%94%A8hexo+Next%E5%88%9B%E5%BB%BAGithub%E5%8D%9A%E5%AE%A2/</loc>
-    <lastmod>2017-06-09T14:42:09.359Z</lastmod>
+    <lastmod>2017-06-12T03:11:54.137Z</lastmod>
     <data>
         <display>
         <title>使用hexo+Next主题创建Github博客</title>
         <pubTime>2017-06-09T08:55:58.452Z</pubTime>
         
-        <tag>-其他</tag>
+        <tag>-建站</tag>
          
          
            
              
-              <breadCrumb title="其他" url="http://jzd2010.github.io/categories/other/"/>
+              <breadCrumb title="建站" url="http://jzd2010.github.io/categories/%E5%BB%BA%E7%AB%99/"/>
           
         </display>
     </data>

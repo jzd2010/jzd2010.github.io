@@ -100,12 +100,12 @@
 <meta property="og:url" content="http://jzd2010.github.io/2017/06/09/爬虫入门/index.html">
 <meta property="og:site_name" content="Blog">
 <meta property="og:description" content="1.获取网页内容根据URL来获取它的网页信息，虽然我们在浏览器中看到的是一幅幅优美的画面，但是其实是由浏览器解释才呈现出来的，实质它是一段HTML代码，加 JS、CSS，如果把网页比作一个人，那么HTML便是他的骨架，JS便是他的肌肉，CSS便是它的衣服。所以最重要的部分是存在于HTML中。1234import urllib2request = urllib2.Request(&quot;http://ww">
-<meta property="og:image" content="http://orb8ay4rk.bkt.clouddn.com/crawler04.png">
-<meta property="og:updated_time" content="2017-06-12T02:20:27.070Z">
+<meta property="og:image" content="http://orb8ay4rk.bkt.clouddn.com/crawler/re_grammar.png">
+<meta property="og:updated_time" content="2017-06-12T05:05:13.303Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="爬虫入门">
 <meta name="twitter:description" content="1.获取网页内容根据URL来获取它的网页信息，虽然我们在浏览器中看到的是一幅幅优美的画面，但是其实是由浏览器解释才呈现出来的，实质它是一段HTML代码，加 JS、CSS，如果把网页比作一个人，那么HTML便是他的骨架，JS便是他的肌肉，CSS便是它的衣服。所以最重要的部分是存在于HTML中。1234import urllib2request = urllib2.Request(&quot;http://ww">
-<meta name="twitter:image" content="http://orb8ay4rk.bkt.clouddn.com/crawler04.png">
+<meta name="twitter:image" content="http://orb8ay4rk.bkt.clouddn.com/crawler/re_grammar.png">
 
 
 
@@ -418,7 +418,7 @@
 <p>设想，如果我们的cookie.txt文件中保存的是某个人登录百度的cookie，那么我们提取出这个 cookie 文件内容，就可以用以上方法模拟这个人的账号登录百度。<br><strong><em>利用Cookie模拟网站登录</em></strong><br>下面我们以我们学校的教育系统为例，利用cookie实现模拟登录，并将cookie信息保存到文本文件中，来感受一下 cookie 大法吧！<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> urllib</div><div class="line"><span class="keyword">import</span> urllib2</div><div class="line"><span class="keyword">import</span> cookielib</div><div class="line"></div><div class="line">filename = <span class="string">'cookie.txt'</span></div><div class="line"><span class="comment">#声明一个MozillaCookieJar对象实例来保存cookie，之后写入文件</span></div><div class="line">cookie = cookielib.MozillaCookieJar(filename)</div><div class="line">opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookie))</div><div class="line">postdata = urllib.urlencode(&#123;</div><div class="line">            <span class="string">'stuid'</span>:<span class="string">'201200131012'</span>,</div><div class="line">            <span class="string">'pwd'</span>:<span class="string">'23342321'</span></div><div class="line">        &#125;)</div><div class="line"><span class="comment">#登录教务系统的URL</span></div><div class="line">loginUrl = <span class="string">'http://jwxt.sdu.edu.cn:7890/pls/wwwbks/bks_login2.login'</span></div><div class="line"><span class="comment">#模拟登录，并把cookie保存到变量</span></div><div class="line">result = opener.open(loginUrl,postdata)</div><div class="line"><span class="comment">#保存cookie到cookie.txt中</span></div><div class="line">cookie.save(ignore_discard=<span class="keyword">True</span>, ignore_expires=<span class="keyword">True</span>)</div><div class="line"><span class="comment">#利用cookie请求访问另一个网址，此网址是成绩查询网址</span></div><div class="line">gradeUrl = <span class="string">'http://jwxt.sdu.edu.cn:7890/pls/wwwbks/bkscjcx.curscopre'</span></div><div class="line"><span class="comment">#请求访问成绩查询网址</span></div><div class="line">result = opener.open(gradeUrl)</div><div class="line"><span class="keyword">print</span> result.read()</div></pre></td></tr></table></figure></p>
 <p>以上程序的原理如下:<br>创建一个带有 cookie 的 opener，在访问登录的 URL 时，将登录后的 cookie 保存下来，然后利用这个 cookie 来访问其他网址。</p>
 <h2 id="4、正则表达式"><a href="#4、正则表达式" class="headerlink" title="4、正则表达式"></a>4、正则表达式</h2><p>正则表达式是对字符串操作的一种逻辑公式，就是用事先定义好的一些特定字符、及这些特定字符的组合，组成一个“规则字符串”，这个“规则字符串”用来表达对字符串的一种过滤逻辑。 正则表达式是用来匹配字符串非常强大的工具，在其他编程语言中同样有正则表达式的概念，Python同样不例外，利用了正则表达式，我们想要从返回的页面内容提取出我们想要的内容就易如反掌了。<br><strong><em>正则表达式的大致匹配过程是：</em></strong><br>(1)依次拿出表达式和文本中的字符比较。<br>(2)如果每一个字符都能匹配，则匹配成功；一旦有匹配不成功的字符则匹配失败。<br>(3)如果表达式中有量词或边界，这个过程会稍微有一些不同。</p>
-<h3 id="正则表达式语法规则"><a href="#正则表达式语法规则" class="headerlink" title="正则表达式语法规则"></a>正则表达式语法规则</h3><p>下面是 Python 中正则表达式的一些匹配规则，图片资料来自 CSDN:<br><img src="http://orb8ay4rk.bkt.clouddn.com/crawler04.png" alt="正则表达式语法规则"></p>
+<h3 id="正则表达式语法规则"><a href="#正则表达式语法规则" class="headerlink" title="正则表达式语法规则"></a>正则表达式语法规则</h3><p>下面是 Python 中正则表达式的一些匹配规则，图片资料来自 CSDN:<br><img src="http://orb8ay4rk.bkt.clouddn.com/crawler/re_grammar.png" alt="正则表达式语法规则"></p>
 <p><strong><em>数量词的贪婪模式与非贪婪模式</em></strong><br>正则表达式通常用于在文本中查找匹配的字符串。Python 里数量词默认是贪婪的（在少数语言里也可能是默认非贪婪），总是尝试匹配尽可能多的字符；非贪婪的则相反，总是尝试匹配尽可能少的字符。例如：正则表达式”ab”如果用于查找”abbbc”，将找到”abbb”。而如果使用非贪婪的数量词 ”ab?”，将找到 ”a”。</p>
 <p><strong>注：我们一般使用非贪婪模式来提取。</strong></p>
 <p><strong><em>反斜杠问题</em></strong><br>与大多数编程语言相同，正则表达式里使用”\”作为转义字符，这就可能造成反斜杠困扰。假如你需要匹配文本中的字符”\”，那么使用编程语言表示的正则表达式里将需要4个反斜杠”\\”：前两个和后两个分别用于在编程语言里转义成反斜杠，转换成两个反斜杠后再在正则表达式里转义成一个反斜杠。<br>Python 里的原生字符串很好地解决了这个问题，这个例子中的正则表达式可以使用 r”\” 表示。同样，匹配一个数字的 ”\d” 可以写成 r”\d”。有了原生字符串，妈妈也不用担心是不是漏写了反斜杠，写出来的表达式也更直观勒。</p>
@@ -536,6 +536,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2017/06/12/Next主题添加文章阅读量统计功能/" rel="prev" title="Next主题添加文章阅读量统计功能">
+                Next主题添加文章阅读量统计功能 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -606,7 +610,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
